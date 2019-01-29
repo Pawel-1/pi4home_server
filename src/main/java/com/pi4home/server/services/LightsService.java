@@ -16,8 +16,17 @@ public class LightsService
 
     public Light switchLight() throws Exception
     {
-        entranceLight.setTurnedOn(true);
+        if(entranceLight.isTurnedOn())
+        {
+            entranceLight.setTurnedOn(false);
+        }
+        else if (!entranceLight.isTurnedOn())
+        {
+            entranceLight.setTurnedOn(true);
+        }
+
         queueProducer.produce(entranceLight);
+
         return entranceLight;
     }
 
