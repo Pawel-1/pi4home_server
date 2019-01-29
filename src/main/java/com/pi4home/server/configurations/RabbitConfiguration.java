@@ -1,4 +1,4 @@
-package com.pi4home.server.configuration;
+package com.pi4home.server.configurations;
 
 
 import org.springframework.amqp.core.Binding;

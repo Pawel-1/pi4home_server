@@ -1,6 +1,6 @@
 package com.pi4home.server.controller;
 
-import com.pi4home.server.QueueProducer;
+import com.pi4home.server.messagesBroker.QueueProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,14 +14,14 @@ public class HelloWorld
     @RequestMapping("/hello")
     public String initDb()
     {
-        try
-        {
-            queueProducer.produce("hello from rabbit");
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+//        try
+//        {
+//            queueProducer.produce("hello from rabbit");
+//        }
+//        catch (Exception e)
+//        {
+//            e.printStackTrace();
+//        }
         return "Hello World!";
     }
 }

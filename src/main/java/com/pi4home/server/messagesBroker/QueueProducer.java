@@ -1,6 +1,7 @@
-package com.pi4home.server;
+package com.pi4home.server.messagesBroker;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.pi4home.server.model.Light;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -25,11 +26,11 @@ public class QueueProducer
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    public void produce(String notificationDTO) throws Exception
+    public void produce(Light light) throws Exception
     {
         logger.info("Storing notification...");
         rabbitTemplate.setExchange(fanoutExchange);
-        rabbitTemplate.convertAndSend(new ObjectMapper().writeValueAsString(notificationDTO));
+        rabbitTemplate.convertAndSend(new ObjectMapper().writeValueAsString(light));
         logger.info("Notification stored in queue sucessfully");
     }
 }
