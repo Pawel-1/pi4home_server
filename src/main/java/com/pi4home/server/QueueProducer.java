@@ -19,16 +19,17 @@ public class QueueProducer
     private final RabbitTemplate rabbitTemplate;
 
     @Autowired
-    public QueueProducer(RabbitTemplate rabbitTemplate) {
+    public QueueProducer(RabbitTemplate rabbitTemplate)
+    {
         super();
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    public void produce(String notificationDTO) throws Exception {
+    public void produce(String notificationDTO) throws Exception
+    {
         logger.info("Storing notification...");
         rabbitTemplate.setExchange(fanoutExchange);
         rabbitTemplate.convertAndSend(new ObjectMapper().writeValueAsString(notificationDTO));
         logger.info("Notification stored in queue sucessfully");
     }
-
 }
