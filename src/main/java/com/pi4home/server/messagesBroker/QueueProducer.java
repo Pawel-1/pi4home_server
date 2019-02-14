@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class QueueProducer
 {
-    protected Logger logger = LoggerFactory.getLogger(getClass());
 
+    private static final Logger logger = LoggerFactory.getLogger(QueueProducer.class);
     @Value("${fanout.exchange}")
     private String fanoutExchange;
 
@@ -28,9 +28,10 @@ public class QueueProducer
 
     public void produce(Light light) throws Exception
     {
-        logger.info("Storing notification...");
+        logger.info("Storing notification on Queue");
         rabbitTemplate.setExchange(fanoutExchange);
         rabbitTemplate.convertAndSend(new ObjectMapper().writeValueAsString(light));
-        logger.info("Notification stored in queue sucessfully");
+        logger.info("Notification stored in queue sucessfully : "
+                + light.getName() + " is turned on: " + light.isTurnedOn());
     }
 }
