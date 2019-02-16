@@ -12,7 +12,7 @@ public class LightsFactoryBeanAppConfig
     public Light entranceLight()
     {
         Light light = new Light();
-        light.setName("entrance");
+        light.setName("entranceLight");
         light.setTurnedOn(false);
 
         return light;
