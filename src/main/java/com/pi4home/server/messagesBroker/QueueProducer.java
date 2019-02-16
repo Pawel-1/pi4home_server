@@ -14,6 +14,7 @@ public class QueueProducer
 {
 
     private static final Logger logger = LoggerFactory.getLogger(QueueProducer.class);
+
     @Value("${fanout.exchange}")
     private String fanoutExchange;
 

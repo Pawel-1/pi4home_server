@@ -5,33 +5,54 @@ import com.pi4home.server.model.Light;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.NoSuchElementException;
+
 @Service
 public class LightsService
 {
     @Autowired
-    Light entranceLight;
+    private Light entranceLight;
+
+    @Autowired
+    private Light sidewalkLight;
+
+    @Autowired
+    List<Light> lightList = Arrays.asList(entranceLight, sidewalkLight);
 
     @Autowired
     QueueProducer queueProducer;
 
-    public Light switchLight() throws Exception
+    public List<Light> switchLight(String name) throws Exception
     {
-        if(entranceLight.isTurnedOn())
+        Light lightByName = getLightByName(name);
+
+        if (lightByName.isTurnedOn())
         {
-            entranceLight.setTurnedOn(false);
+            lightByName.setTurnedOn(false);
         }
-        else if (!entranceLight.isTurnedOn())
+        else if (!lightByName.isTurnedOn())
         {
-            entranceLight.setTurnedOn(true);
+            lightByName.setTurnedOn(true);
         }
 
-        queueProducer.produce(entranceLight);
+        queueProducer.produce(lightByName);
 
-        return entranceLight;
+        return lightList;
     }
 
-    public Light getLightStatus()
+    private Light getLightByName(String name)
     {
-        return entranceLight;
+        return lightList
+                .stream()
+                .filter(light -> light.getName().equals(name))
+                .findFirst()
+                .orElseThrow(() -> new NoSuchElementException());
+    }
+
+    public List<Light> getLightStatus()
+    {
+        return lightList;
     }
 }
