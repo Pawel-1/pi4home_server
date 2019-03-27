@@ -25,7 +25,7 @@ public class LightsController
         return lightsService.getLightStatus();
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/light/{name}")
+    @RequestMapping(method = RequestMethod.PUT, value = "/light/{name}")
     public List<Light> light(@RequestBody Light light)
     {
         lightsService.updateLightState(light);
