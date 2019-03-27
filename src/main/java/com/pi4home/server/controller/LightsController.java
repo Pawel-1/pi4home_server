@@ -3,9 +3,7 @@ package com.pi4home.server.controller;
 import com.pi4home.server.model.Light;
 import com.pi4home.server.services.LightsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,7 +14,7 @@ public class LightsController
     LightsService lightsService;
 
     @RequestMapping("/light/{name}")
-    public List<Light> light(@PathVariable String name) throws Exception
+    public List<Light> light(@PathVariable String name)
     {
         return lightsService.switchLight(name);
     }
@@ -24,6 +22,13 @@ public class LightsController
     @RequestMapping("/lightStatus")
     public List<Light> lightStatus()
     {
+        return lightsService.getLightStatus();
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/light/{name}")
+    public List<Light> light(@RequestBody Light light)
+    {
+        lightsService.updateLightState(light);
         return lightsService.getLightStatus();
     }
 }

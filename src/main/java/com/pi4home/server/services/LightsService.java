@@ -24,7 +24,7 @@ public class LightsService
     @Autowired
     QueueProducer queueProducer;
 
-    public List<Light> switchLight(String name) throws Exception
+    public List<Light> switchLight(String name)
     {
         Light lightByName = getLightByName(name);
 
@@ -37,7 +37,7 @@ public class LightsService
             lightByName.setTurnedOn(true);
         }
 
-        queueProducer.produce(lightByName);
+        produceToQueue(lightByName);
 
         return lightList;
     }
@@ -54,5 +54,25 @@ public class LightsService
     public List<Light> getLightStatus()
     {
         return lightList;
+    }
+
+    public void updateLightState(Light lightFromRq)
+    {
+        Light lightByName = getLightByName(lightFromRq.getName());
+        lightByName.setTurnedOn(lightFromRq.isTurnedOn());
+
+        produceToQueue(lightByName);
+    }
+
+    private void produceToQueue(Light lightByName)
+    {
+        try
+        {
+            queueProducer.produce(lightByName);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }
