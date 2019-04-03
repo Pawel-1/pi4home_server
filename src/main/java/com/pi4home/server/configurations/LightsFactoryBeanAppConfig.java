@@ -27,5 +27,4 @@ public class LightsFactoryBeanAppConfig
 
         return light;
     }
-
 }
