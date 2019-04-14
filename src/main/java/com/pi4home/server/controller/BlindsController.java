@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
+
 public class BlindsController
 {
     @Autowired
@@ -16,5 +18,11 @@ public class BlindsController
     public Blind blind(@RequestBody Blind blind)
     {
         return blindsService.setBlindState(blind);
+    }
+
+    @RequestMapping("/blindStatus")
+    public List<Blind> BlindStatus()
+    {
+        return blindsService.getBlindStatus();
     }
 }
