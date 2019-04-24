@@ -30,4 +30,10 @@ public class BlindsController
     {
         return blindsService.updateBlindStateInDb(name, percentageMaskingState);
     }
+
+    @RequestMapping("/initDb")
+    public void initDb()
+    {
+        blindsService.initDb();
+    }
 }

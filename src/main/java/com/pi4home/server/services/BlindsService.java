@@ -85,4 +85,11 @@ public class BlindsService
         blindRepositoryAll.forEach(blindList::add);
         return blindList;
     }
+
+    public void initDb()
+    {
+        blindList
+                .forEach(blindRepository::save);
+
+    }
 }
