@@ -4,11 +4,13 @@ import com.pi4home.server.jpa.BlindRepository;
 import com.pi4home.server.messagesBroker.QueueProducer;
 import com.pi4home.server.model.Blind;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+@Service
 public class BlindsService
 {
     @Autowired
