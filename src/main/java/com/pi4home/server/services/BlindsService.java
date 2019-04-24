@@ -6,6 +6,7 @@ import com.pi4home.server.model.Blind;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -69,6 +70,19 @@ public class BlindsService
 
     public List<Blind> getBlindStatus()
     {
+        return blindList;
+    }
+
+    public List<Blind> updateBlindStateInDb(String name, Double percentageMaskingState)
+    {
+        Blind blindByName = getBlindByName(name);
+        blindByName.setPercentageMaskingState(percentageMaskingState);
+        blindRepository.save(blindByName);
+
+        List<Blind> blindList = new ArrayList<>();
+
+        Iterable<Blind> blindRepositoryAll = blindRepository.findAll();
+        blindRepositoryAll.forEach(blindList::add);
         return blindList;
     }
 }
