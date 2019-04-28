@@ -46,6 +46,7 @@ public class BlindsService
     public Blind setBlindState(Blind blindFromRq)
     {
         Blind blindByName = getBlindByName(blindFromRq.getName());
+        blindByName.setPercentageMaskingState(blindFromRq.getPercentageMaskingState());
 
         try
         {
