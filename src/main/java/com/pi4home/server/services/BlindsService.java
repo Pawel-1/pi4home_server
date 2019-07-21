@@ -49,6 +49,7 @@ public class BlindsService
 
     public Blind setBlindState(Blind blindFromRq)
     {
+        logger.info("Processing blind update: " + blindFromRq.getName());
         Blind blindByName = getBlindByName(blindFromRq.getName());
         blindByName.setPercentageMaskingState(blindFromRq.getPercentageMaskingState());
 
