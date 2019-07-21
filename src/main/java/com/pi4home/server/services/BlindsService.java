@@ -53,15 +53,15 @@ public class BlindsService
         Blind blindByName = getBlindByName(blindFromRq.getName());
         blindByName.setPercentageMaskingState(blindFromRq.getPercentageMaskingState());
 
-//        try
-//        {
-//            queueProducer.produce(blindByName);
-//        }
-//        catch (Exception e)
-//        {
-//            e.printStackTrace();
-//        }
-//        updateDb(blindByName);
+        try
+        {
+            queueProducer.produce(blindByName);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        updateDb(blindByName);
         return blindByName;
     }
 
