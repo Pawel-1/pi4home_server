@@ -61,7 +61,7 @@ public class BlindsService
         {
             e.printStackTrace();
         }
-        updateDb(blindByName);
+//        updateDb(blindByName);
         return blindByName;
     }
 
