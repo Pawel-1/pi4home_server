@@ -3,6 +3,8 @@ package com.pi4home.server.services;
 import com.pi4home.server.jpa.BlindRepository;
 import com.pi4home.server.messagesBroker.QueueProducer;
 import com.pi4home.server.model.Blind;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,8 @@ import java.util.NoSuchElementException;
 @Service
 public class BlindsService
 {
+    private static final Logger logger = LoggerFactory.getLogger(BlindsService.class);
+
     @Autowired
     QueueProducer queueProducer;
 
@@ -56,8 +60,14 @@ public class BlindsService
         {
             e.printStackTrace();
         }
-        blindRepository.save(blindByName);
+        updateDb(blindByName);
         return blindByName;
+    }
+
+    private void updateDb(Blind blindByName)
+    {
+        logger.info("saving data in DB: " + blindByName.getName() + "state: " + blindByName.getPercentageMaskingState());
+        blindRepository.save(blindByName);
     }
 
     private Blind getBlindByName(String blindName)
@@ -78,7 +88,7 @@ public class BlindsService
     {
         Blind blindByName = getBlindByName(name);
         blindByName.setPercentageMaskingState(percentageMaskingState);
-        blindRepository.save(blindByName);
+        updateDb(blindByName);
 
         List<Blind> blindList = new ArrayList<>();
 
