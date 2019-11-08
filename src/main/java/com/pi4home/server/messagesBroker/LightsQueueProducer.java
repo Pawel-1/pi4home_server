@@ -1,7 +1,6 @@
 package com.pi4home.server.messagesBroker;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pi4home.server.model.Blind;
 import com.pi4home.server.model.Light;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,18 +10,18 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class QueueProducer
+public class LightsQueueProducer
 {
 
-    private static final Logger logger = LoggerFactory.getLogger(QueueProducer.class);
+    private static final Logger logger = LoggerFactory.getLogger(LightsQueueProducer.class);
 
-    @Value("${fanout.exchange}")
+    @Value("${lights.fanout.exchange}")
     private String fanoutExchange;
 
     private final RabbitTemplate rabbitTemplate;
 
     @Autowired
-    public QueueProducer(RabbitTemplate rabbitTemplate)
+    public LightsQueueProducer(RabbitTemplate rabbitTemplate)
     {
         super();
         this.rabbitTemplate = rabbitTemplate;
@@ -35,15 +34,6 @@ public class QueueProducer
         rabbitTemplate.convertAndSend(new ObjectMapper().writeValueAsString(light));
         logger.info("Notification stored in queue sucessfully : "
                 + light.getName() + " is turned on: " + light.isTurnedOn());
-    }
-
-    public void produce(Blind blind) throws Exception
-    {
-        logger.info("Storing notification on Queue");
-        rabbitTemplate.setExchange(fanoutExchange);
-        rabbitTemplate.convertAndSend(new ObjectMapper().writeValueAsString(blind));
-        logger.info("Notification stored in queue sucessfully : "
-                + blind.getName() + " is turned on: " + blind.getPercentageMaskingState());
     }
 
 }

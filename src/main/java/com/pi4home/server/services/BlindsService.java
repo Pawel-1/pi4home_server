@@ -1,7 +1,7 @@
 package com.pi4home.server.services;
 
 import com.pi4home.server.jpa.BlindRepository;
-import com.pi4home.server.messagesBroker.QueueProducer;
+import com.pi4home.server.messagesBroker.BlindsQueueProducer;
 import com.pi4home.server.model.Blind;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +19,7 @@ public class BlindsService
     private static final Logger logger = LoggerFactory.getLogger(BlindsService.class);
 
     @Autowired
-    QueueProducer queueProducer;
+    BlindsQueueProducer queueProducer;
 
     @Autowired
     private BlindRepository blindRepository;

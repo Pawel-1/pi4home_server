@@ -1,6 +1,6 @@
 package com.pi4home.server.services;
 
-import com.pi4home.server.messagesBroker.QueueProducer;
+import com.pi4home.server.messagesBroker.LightsQueueProducer;
 import com.pi4home.server.model.Light;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class LightsService
     List<Light> lightList = Arrays.asList(entranceLight, sidewalkLight);
 
     @Autowired
-    QueueProducer queueProducer;
+    LightsQueueProducer lightsQueueProducer;
 
     public List<Light> switchLight(String name)
     {
@@ -68,7 +68,7 @@ public class LightsService
     {
         try
         {
-            queueProducer.produce(lightByName);
+            lightsQueueProducer.produce(lightByName);
         }
         catch (Exception e)
         {

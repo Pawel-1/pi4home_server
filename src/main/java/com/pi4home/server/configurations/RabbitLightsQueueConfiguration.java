@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitLightsQueueConfiguration
 {
-    @Value("${fanout.exchange}")
+    @Value("${lights.fanout.exchange}")
     private String fanoutExchange;
     @Value("${lights.queue.name}")
     private String queueName;
