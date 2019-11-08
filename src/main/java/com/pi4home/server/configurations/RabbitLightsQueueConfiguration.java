@@ -10,11 +10,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class RabbitConfiguration
+public class RabbitLightsQueueConfiguration
 {
     @Value("${fanout.exchange}")
     private String fanoutExchange;
-    @Value("${queue.name}")
+    @Value("${lights.queue.name}")
     private String queueName;
 
     @Bean
