@@ -42,14 +42,6 @@ public class LightsService
         return lightList;
     }
 
-    private Light getLightByName(String name)
-    {
-        return lightList
-                .stream()
-                .filter(light -> light.getName().equals(name))
-                .findFirst()
-                .orElseThrow(() -> new NoSuchElementException());
-    }
 
     public List<Light> getLightStatus()
     {
@@ -63,6 +55,16 @@ public class LightsService
 
         produceToQueue(lightByName);
     }
+
+    private Light getLightByName(String name)
+    {
+        return lightList
+                .stream()
+                .filter(light -> light.getName().equals(name))
+                .findFirst()
+                .orElseThrow(() -> new NoSuchElementException());
+    }
+
 
     private void produceToQueue(Light lightByName)
     {
