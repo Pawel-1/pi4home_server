@@ -1,6 +1,9 @@
 package com.pi4home.server.services;
 
+import com.pi4home.server.controller.YeelightController;
+import com.pi4home.server.messagesBroker.YeelightsQueueProducer;
 import com.pi4home.server.model.Yeelight;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,6 +12,8 @@ import java.util.List;
 public class YeelightService
 {
 
+    @Autowired
+    YeelightsQueueProducer yeelightsQueueProducer;
 
     public List<Yeelight> switchYeelight(String name)
     {
@@ -22,6 +27,13 @@ public class YeelightService
 
     public void updateYeelightState(Yeelight yeelight)
     {
-
+        try
+        {
+            yeelightsQueueProducer.produce(yeelight);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }

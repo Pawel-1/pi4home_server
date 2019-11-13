@@ -25,7 +25,6 @@ public class YeelightController
         return yeeslightService.getYeelightStatus();
     }
 
-    //ToDo: do we need /{name} ?
     @RequestMapping(method = RequestMethod.PUT, value = "/yeelight/")
     public List<Yeelight> light(@RequestBody Yeelight yeelight)
     {
