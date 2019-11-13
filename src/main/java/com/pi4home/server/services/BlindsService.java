@@ -56,12 +56,13 @@ public class BlindsService
         try
         {
             queueProducer.produce(blindByName);
+            updateDb(blindByName);
+
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
-        updateDb(blindByName);
         return blindByName;
     }
 
