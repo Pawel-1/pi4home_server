@@ -28,6 +28,7 @@ public class YeelightController
     @RequestMapping(method = RequestMethod.PUT, value = "/yeelight/")
     public List<Yeelight> light(@RequestBody Yeelight yeelight)
     {
+        System.out.println("RQ: " + yeelight.getName() + " turned on: " + yeelight.isTurnedOn());
         yeeslightService.updateYeelightState(yeelight);
         return yeeslightService.getYeelightStatus();
     }

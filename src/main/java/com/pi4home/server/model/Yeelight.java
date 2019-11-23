@@ -3,7 +3,7 @@ package com.pi4home.server.model;
 public class Yeelight
 {
     private String name;
-    private boolean isTurnedOn;
+    private boolean turnedOn;
     private RGB rgb;
     private int brightness;
     private int hue;
@@ -22,12 +22,12 @@ public class Yeelight
 
     public boolean isTurnedOn()
     {
-        return isTurnedOn;
+        return turnedOn;
     }
 
     public void setTurnedOn(boolean turnedOn)
     {
-        this.isTurnedOn = turnedOn;
+        this.turnedOn = turnedOn;
     }
 
     public RGB getRgb()
