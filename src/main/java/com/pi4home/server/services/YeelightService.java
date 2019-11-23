@@ -1,6 +1,5 @@
 package com.pi4home.server.services;
 
-import com.pi4home.server.controller.YeelightController;
 import com.pi4home.server.messagesBroker.YeelightsQueueProducer;
 import com.pi4home.server.model.Yeelight;
 import org.springframework.beans.factory.annotation.Autowired;
