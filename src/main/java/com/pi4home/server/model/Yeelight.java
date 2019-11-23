@@ -27,7 +27,7 @@ public class Yeelight
 
     public void setTurnedOn(boolean turnedOn)
     {
-        isTurnedOn = turnedOn;
+        this.isTurnedOn = turnedOn;
     }
 
     public RGB getRgb()
