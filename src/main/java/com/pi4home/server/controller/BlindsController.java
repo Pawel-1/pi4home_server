@@ -21,7 +21,7 @@ public class BlindsController
     @RequestMapping(method = RequestMethod.PUT, value = "/blind/")
     public Blind blind(@RequestBody Blind blind)
     {
-        logger.info("Received RQ for updating Blind: "+ blind.getName());
+        logger.info("Received RQ for updating Blind: " + blind.getName());
         return blindsService.setBlindState(blind);
     }
 
@@ -29,6 +29,12 @@ public class BlindsController
     public List<Blind> BlindStatus()
     {
         return blindsService.getBlindStatus();
+    }
+
+    @RequestMapping("/blinds/{name}/{percentageMaskingState}")
+    public void updateBlindStateByValue(@PathVariable String name, @PathVariable Double percentageMaskingState)
+    {
+        blindsService.updateBlindStateByValue(name, percentageMaskingState);
     }
 
     @RequestMapping("/blinds/{name}/{percentageMaskingState}")
