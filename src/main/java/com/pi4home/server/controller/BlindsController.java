@@ -37,7 +37,7 @@ public class BlindsController
         blindsService.updateBlindStateByValue(name, percentageMaskingState);
     }
 
-    @RequestMapping("/blinds/{name}/{percentageMaskingState}")
+    @RequestMapping("/blindsDB/{name}/{percentageMaskingState}")
     public List<Blind> updateBlindStateInDbOnly(@PathVariable String name, @PathVariable Double percentageMaskingState)
     {
         return blindsService.updateBlindStateInDb(name, percentageMaskingState);
