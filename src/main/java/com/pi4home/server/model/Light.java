@@ -1,5 +1,8 @@
 package com.pi4home.server.model;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Light
 {
     private String name;
