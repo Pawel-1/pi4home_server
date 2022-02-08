@@ -25,11 +25,9 @@ public class LightsController
         return lightsService.getLightStatus();
     }
 
-    //ToDo: do we need /{name} ?
-    @RequestMapping(method = RequestMethod.PUT, value = "/light/{name}")
-    public List<Light> light(@RequestBody Light light)
+    @RequestMapping(method = RequestMethod.PUT, value = "/light/")
+    public Light light(@RequestBody Light light)
     {
-        lightsService.updateLightState(light);
-        return lightsService.getLightStatus();
+        return lightsService.updateLightState(light);
     }
 }

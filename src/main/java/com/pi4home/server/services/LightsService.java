@@ -15,11 +15,9 @@ public class LightsService
     @Autowired
     private Light entranceLight;
 
-    @Autowired
-    private Light sidewalkLight;
 
     @Autowired
-    List<Light> lightList = Arrays.asList(entranceLight, sidewalkLight);
+    List<Light> lightList = Arrays.asList(entranceLight);
 
     @Autowired
     LightsQueueProducer lightsQueueProducer;
@@ -48,12 +46,14 @@ public class LightsService
         return lightList;
     }
 
-    public void updateLightState(Light lightFromRq)
+    public Light updateLightState(Light lightFromRq)
     {
         Light lightByName = getLightByName(lightFromRq.getName());
         lightByName.setTurnedOn(lightFromRq.isTurnedOn());
 
         produceToQueue(lightByName);
+
+        return lightByName;
     }
 
     private Light getLightByName(String name)
