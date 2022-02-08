@@ -1,5 +1,6 @@
 package com.pi4home.server.controller;
 
+import com.pi4home.server.jpa.BlindRepository;
 import com.pi4home.server.model.Blind;
 import com.pi4home.server.services.BlindsService;
 import org.slf4j.Logger;
@@ -14,6 +15,8 @@ public class BlindsController
 {
     private static final Logger logger = LoggerFactory.getLogger(BlindsController.class);
 
+    @Autowired
+    private BlindRepository blindRepository;
 
     @Autowired
     BlindsService blindsService;
@@ -26,9 +29,9 @@ public class BlindsController
     }
 
     @RequestMapping("/blindStatus")
-    public List<Blind> BlindStatus()
+    public Iterable<Blind> BlindStatus()
     {
-        return blindsService.getBlindStatus();
+        return blindRepository.findAll();
     }
 
     @RequestMapping("/blinds/{name}/{percentageMaskingState}")
