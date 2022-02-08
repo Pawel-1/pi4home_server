@@ -1,12 +1,14 @@
 package com.pi4home.server.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "LIGHTS")
 public class Light
 {
+    @Id
     private String name;
     private boolean isTurnedOn;
 
