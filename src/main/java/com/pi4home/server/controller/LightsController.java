@@ -1,5 +1,6 @@
 package com.pi4home.server.controller;
 
+import com.pi4home.server.jpa.LightRepository;
 import com.pi4home.server.model.Light;
 import com.pi4home.server.services.LightsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ public class LightsController
 {
     @Autowired
     LightsService lightsService;
+    @Autowired
+    LightRepository lightRepository;
 
     @RequestMapping("/light/{name}")
     public List<Light> light(@PathVariable String name)
@@ -20,9 +23,9 @@ public class LightsController
     }
 
     @RequestMapping("/lightStatus")
-    public List<Light> lightStatus()
+    public Iterable<Light> lightStatus()
     {
-        return lightsService.getLightStatus();
+        return lightRepository.findAll();
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/light/")
