@@ -1,8 +1,10 @@
 package com.pi4home.server.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "LIGHTS")
 public class Light
 {
     private String name;
